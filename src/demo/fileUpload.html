@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="single">
+        <div class="title">单个文件上传</div>
+        <input type="file" name="singleFile" id="singleFile">
+        <button class="submit">上传</button>
+    </div>
+
+    <div class="multer">
+        <div class="title">多个文件上传</div>
+        <input type="file" name="multerFile" id="multerFile" multiple>
+        <button class="submit">上传</button>
+    </div>
+
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+
+        $('.single .submit').on('click',function(){
+
+            var fileList = $('#singleFile')[0].files;
+            console.log(fileList);
+            var formData = new FormData();
+
+            formData.append('singleFile', fileList[0]);
+
+            $.ajax({
+                url: 'http://127.0.0.1:10317/file/upload/single',
+                type:'post',
+                processData:false,
+                contentType:false,
+                data: formData,
+                success: function(data){
+                    console.log(data)
+                }
+            })
+        });
+
+
+        $('.multer .submit').on('click',function(){
+
+            var fileList = $('#multerFile')[0].files;
+            console.log(fileList);
+            var formData = new FormData();
+
+            for(let i = 0; i < fileList.length; i++){
+                formData.append('multerFile', fileList[i]);
+            }
+
+            $.ajax({
+                url: 'http://127.0.0.1:10317/file/upload/multer',
+                type:'post',
+                processData:false,
+                contentType:false,
+                data: formData,
+                success: function(data){
+                    console.log(data)
+                }
+            })
+        });
+
+
+    </script>
+</body>
+</html>
