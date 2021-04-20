@@ -1,5 +1,7 @@
 var express = require('express')
 var app = express(); //创建express的实例
+var expressWs = require('express-ws')(app);
+
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
@@ -69,15 +71,26 @@ app.get('/', function (req, res) {
 // 统一文件接口
 app.use('/file', require(__dirname + '/src/api/fileApi'));
 
-
 // 用户相关接口
 app.use('/user', require(__dirname + '/src/api/userApi'));
 
 
 
 
+
+app.ws('/ws', (ws, req) => {
+    ws.send('websocket-连接成功!')
+    ws.on('message', function (msg) {
+        // 业务代码
+        console.log('ws接收到消息=',msg)
+        ws.send(msg)
+    })
+})
+
+
 // MAIN
 var server = app.listen(baseConfig.port, function () {
     console.log("Server running at " + baseConfig.port + " port");
+    console.log("Server WebSocket running at ws://127.0.0.1:" + baseConfig.port + "/ws")
 });
 
