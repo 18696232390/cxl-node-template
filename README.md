@@ -7,11 +7,12 @@
 适应前后端分离开发的一款基于node快速接口开发脚手架(模板),集成了mysql，redis的存储，一键式配置，模块层层分离，适应小型项目的后端开发框架。
 
 - 整合Node.js+express
-- 整合MySQL数据库
+- 整合MySQL5,6数据库
 - 整合Redis缓存数据库
 - 文件单/多上传
 - 统一返回值封装
 - 统一UUID生成
+- websocket整合
 
 
 
@@ -80,20 +81,47 @@ npm start
 
 
 ### 二次开发指南
-待写
+#### 1.接口开发
+##### 1.1 创建第一个接口
+在`/src/api/` 下创建helloWorldApi.js，引入如下头部
+```js
+const express = require('express');
+const router = express.Router();
+const apiUtils = require('../../utils/apiUtils')
 
+router.get('/test',async (req, res) => {
+  try {
+      apiUtils.sendSuccessMsg(res,"HelloWorld")
+  } catch (error) {
+      apiUtils.sendErrorMsg(res)
+  }
+})
 
+```
+
+##### 1.2 注册接口
+在`/app.js`里面
+```js
+app.use('/test', require(__dirname + '/src/api/helloWorldApi'));
+```
+
+##### 1.33.启动访问
+```
+http://127.0.0.1:10317/test/test
+```
+可以看到页面上返回`HelloWorld`
 
 ### 开发进度
 
 | 功能名称 | 是否完成| 完成时间 |
 | - |- |- |
-| 🌟基本的node框架 | 是|2021年3月27日 |
+| 🌟基本的node框架+解决跨域 | 是|2021年3月27日 |
 | 🌟整合Mysql| 是 | 2021年4月17日 | 
 | 🌟整合Redis| 是 | 2021年4月17日 | 
 | 🌟封装返回实体| 是 | 2021年4月17日 | 
 | 🌟封装mysql+redis| 是 | 2021年4月17日 | 
 | 🌟封装单/多文件上传| 是 | 2021年4月17日 | 
+| 🌟整合websocket | 是 | 2021年4月20日 |
 | 📌封装mysql分页功能 | 否 | 待实现 |
 | 📌整合封装ElasticSearch | 否 | 待实现 |
 | 📌整合封装相关OSS接口 | 否 | 待实现 |
