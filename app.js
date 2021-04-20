@@ -13,6 +13,12 @@ const baseConfig = require('./config/baseConfig')
 const apiUtils = require('./utils/apiUtils')
 // ⚡ 实体工具，生成UUID
 const entityUtils = require('./utils/entityUtils')
+// ⚡ 数据库工具
+const dbUtils = require('./utils/dbUtils')
+// ⚡ elasticSearch工具
+const esUtils = require('./utils/esUtils')
+// ⚡ redis工具
+const redisUtils = require('./utils/redisUtils');
 // ⚡ 业务常量
 const bizConst = require('./src/constant/bizConst')
 
@@ -25,15 +31,19 @@ app.use(bodyParser.json());
 app.use(cors())
 
 // service
-const userService = require('./src/service/userService')
+const userService = require('./src/service/userService');
+
 
 var data = {
     result: null
 }
 
 function mounted() {
+
+    dbUtils.initConnect()
+    redisUtils.initConnect()
+    esUtils.initConnect()
     
-   
     console.log('[APP.js]挂载--- userService === ', userService)
 }
 mounted()

@@ -22,7 +22,7 @@ var baseConfig = {
         port:9200,
         username:'',
         password:'',
-        loggerLevel:'error'
+        loggerLevel:'error',
     }
 }
 

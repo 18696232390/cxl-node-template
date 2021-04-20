@@ -5,10 +5,6 @@ const bizConst = require('../constant/bizConst')
 
 // init
 function mounted() {
-    // 初始化mysql连接
-    dbUtils.initConnect();
-    // 初始化redis连接
-    redisUtils.initConnect();
 }
 mounted()
 
