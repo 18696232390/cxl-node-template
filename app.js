@@ -1,3 +1,4 @@
+var startTime = new Date()
 var express = require('express')
 var app = express(); //创建express的实例
 var expressWs = require('express-ws')(app);
@@ -31,7 +32,9 @@ var data = {
 }
 
 function mounted() {
-    console.log('挂载--- userService === ', userService)
+    
+   
+    console.log('[APP.js]挂载--- userService === ', userService)
 }
 mounted()
 
@@ -90,7 +93,10 @@ app.ws('/ws', (ws, req) => {
 
 // MAIN
 var server = app.listen(baseConfig.port, function () {
-    console.log("Server running at " + baseConfig.port + " port");
-    console.log("Server WebSocket running at ws://127.0.0.1:" + baseConfig.port + "/ws")
+    console.log('\033[31m ----------接口启动完成--------------- \033[39m')
+    console.log("[main] Server running at " + baseConfig.port + " port");
+    console.log("[main] Server WebSocket running at ws://127.0.0.1:" + baseConfig.port + "/ws")
+    console.log('\033[31m ---------------------------------------- \033[39m')
+    console.log('\033[42;30m DONE \033[40;32m Compiled successfully in '+((new Date())-startTime)+'ms \033[m')
 });
 

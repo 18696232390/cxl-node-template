@@ -15,6 +15,14 @@ var baseConfig = {
         port: 6379,
         username: '',
         password: ''
+    },
+    elasticsearch:{
+        isOpen:false,
+        ip:'127.0.0.1',
+        port:9200,
+        username:'',
+        password:'',
+        loggerLevel:'error'
     }
 }
 

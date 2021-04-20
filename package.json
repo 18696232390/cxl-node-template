@@ -5,6 +5,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "elasticsearch": "^16.7.2",
     "express": "^4.17.1",
     "express-ws": "^4.0.0",
     "fs": "0.0.1-security",

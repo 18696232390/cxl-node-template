@@ -4,16 +4,19 @@ var dbUtils = {}
 dbUtils.connection = null
 
 dbUtils.initConnect = ()=>{
-    var connection = mysql.createConnection({      //创建mysql实例
-        host:baseConfig.sql.host,
-        port:baseConfig.sql.port,
-        user:baseConfig.sql.user,
-        password:baseConfig.sql.password,
-        database:baseConfig.sql.database
-    });
-    dbUtils.connection = connection
-    connection.connect();
-    console.log('数据库连接成功！')
+    if(!dbUtils.connection){
+        var connection = mysql.createConnection({      //创建mysql实例
+            host:baseConfig.sql.host,
+            port:+baseConfig.sql.port,
+            user:baseConfig.sql.user,
+            password:baseConfig.sql.password,
+            database:baseConfig.sql.database
+        });
+        dbUtils.connection = connection
+        connection.connect();
+        console.log('\033[42;30m 模块-MYSQL \033[40;32m Starting successfully \033[m')
+    }
+    
 }
 
 dbUtils.query = (sql)=>{

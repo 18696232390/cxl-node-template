@@ -16,10 +16,10 @@ redisUtils.initConnect = () => {
             redisClient.on('error', function (err) {
                 console.log('Redis连接失败！ Error ' + err);
             });
-            console.log('Redis连接成功!')
+            console.log('\033[42;30m 模块-Redis \033[40;32m Starting successfully \033[m')
         }
     } else {
-        console.warn('尚未开启redis功能')
+        console.log('\033[42;40m 模块-Redis \033[40;33m 尚未开启redis功能 \033[m')
     }
 }
 
