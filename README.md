@@ -97,6 +97,8 @@ router.get('/test',async (req, res) => {
   }
 })
 
+module.exports = router;
+
 ```
 
 ##### 1.2 注册接口
@@ -109,7 +111,89 @@ app.use('/test', require(__dirname + '/src/api/helloWorldApi'));
 ```
 http://127.0.0.1:10317/test/test
 ```
-可以看到页面上返回`HelloWorld`
+可以看到页面上返回
+```json
+{
+  "code": "1",
+  "msg": "调用接口成功",
+  "data": "HelloWorld",
+  "request_time": 1618906315494
+}
+```
+
+#### 2.操作MySQL
+##### 2.1 引入MySQL工具类 
+系统已经默认初始化mysql连接，无需自己初始化
+```js
+const dbUtils = require('../../utils/dbUtils')
+```
+
+##### 2.2 查询数据
+使用`dbUtils.query(sql)`进行查询
+```js
+  var sql = "SELECT * FROM SYS_USER WHERE USER_NAME = '" + username + "' AND PASS_WORD = '" + password + "'";
+  dbUtils.query(sql)
+   .then(res=>{
+       resolve(res)
+   }).then(err=>{
+       reject(err)
+   })
+```
+
+##### 2.3 更新数据
+使用`dbUtils.update(sql)`进行更新/修改/删除
+```js
+var sql = " DELETE FROM SYS_USER WHERE ID = '" + id + "' ";
+  dbUtils.update(sql)
+    .then(res => {
+        resolve(res)
+    }).then(err => {
+        reject(err)
+    })
+```
+#### 3.Redis操作
+##### 3.1 引入redis工具类
+```js
+const redisUtils = require('../../utils/redisUtils')
+```
+注意要开启redis功能
+
+##### 3.2 存入redis
+语法：
+```js
+redisUtils.set(key , 数据)
+```
+案例：
+```js
+redisUtils.set(bizConst.userConst.REDIS_KEY, JSON.stringify(res))
+```
+
+##### 3.3 取数据
+语法：
+```js
+redisUtils.get(值的key).then(res=>{
+   // .. res为存入的数据
+})
+```
+
+案例：
+
+```js
+redisUtils.get(bizConst.userConst.REDIS_KEY).then(redisResult => {
+  // 业务代码
+})
+```
+
+##### 3.4 删除数据
+语法：
+```js
+redisUtils.del(值的key)
+```
+案例：
+```js
+redisUtils.del(bizConst.userConst.REDIS_KEY)
+```
+
 
 ### 开发进度
 
