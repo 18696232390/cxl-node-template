@@ -81,6 +81,7 @@ npm start
 
 
 ### 二次开发指南
+> 开发文档完整版：https://18696232390.github.io/cxl-node-template/
 #### 1.接口开发
 ##### 1.1 创建第一个接口
 在`/src/api/` 下创建helloWorldApi.js，引入如下头部
