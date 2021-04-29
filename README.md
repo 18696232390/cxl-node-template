@@ -26,7 +26,7 @@ git clone https://github.com/18696232390/cxl-node-template.git
 #### 2.安装依赖
 ```bash
 cd cxl-node-template
-npm install  # 或者 npm i
+npm install  # 或 npm i
 ```
 
 #### 3.启动访问
