@@ -9,7 +9,7 @@
 - 整合Node.js+express
 - 整合MySQL5,6数据库
 - 整合Redis缓存数据库
-- 文件单/多上传
+- 文件单/多上传功能(附示例）
 - 统一返回值封装
 - 统一UUID生成
 - websocket整合
